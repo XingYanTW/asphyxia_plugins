@@ -4,14 +4,15 @@ function zeroPad(num, places) {
 }
 
 function getImageFileFormat(assetType, id) {
-    if(assetType == 0) {
+    if (assetType == 0) {
         //if (id >= 103) return '.png' 
         return '.png'
     }
 }
 
-(function($) {
-    $.preload = function() {
+(function ($) {
+    console.log("1");
+    $.preload = function () {
         var imgs = Object.prototype.toString.call(arguments[0]) === '[object Array]' ?
             arguments[0] : arguments;
 
@@ -19,11 +20,12 @@ function getImageFileFormat(assetType, id) {
         var i = imgs.length;
 
         // reverse loop run faster
-        for (; i--;) tmp.push($('<img />').attr('src', imgs[i]));
+        //for (; i--;) tmp.push($('<img />').attr('src', imgs[i]));
     };
 })(jQuery);
 
-$('#nemsys_select').change(function() {
+$('#nemsys_select').change(function () {
+    console.log("1");
     $('#nemsys_pre').fadeOut(200, () => {
         if ($('#nemsys_select').val() != 30) {
             $('#nemsys_pre').attr("src", "static/asset/nemsys/nemsys_" + zeroPad($('#nemsys_select').val(), 4) + ".png");
@@ -35,22 +37,22 @@ $('#nemsys_select').change(function() {
     $('#nemsys_pre').fadeIn(200);
 });
 
-$('[name="subbg"]').change(async function() {
+$('[name="subbg"]').change(async function () {
     let subbgType = database['subbg'].filter((e => e.value === parseInt($('[name="subbg"]').val())))[0]['type']
     let isSubbgSlideshow = (subbgType === 'slideshow')
     $('#sub_pre').fadeOut(200)
     $('#sub_pre_vid').fadeOut(200)
-    if(subbgType === 'video') {
+    if (subbgType === 'video') {
         $('#sub_pre_vid_src').attr('src', "static/asset/submonitor_bg/subbg_" + zeroPad($('[name="subbg"]').val(), 4) + '.mp4')
         document.getElementById('sub_pre_vid').load()
         $('#sub_pre_vid').fadeIn(200)
     } else {
-        $('#sub_pre').fadeOut(200, () => { $('#sub_pre').attr("src", isSubbgSlideshow ? "static/asset/submonitor_bg/subbg_" + zeroPad($('[name="subbg"]').val(), 4) + "_0" + (Math.floor(Math.random() * 3) + 1) + getImageFileFormat(0, parseInt(zeroPad($('[name="subbg"]').val(), 4))) : "static/asset/submonitor_bg/subbg_" + zeroPad($('[name="subbg"]').val(), 4) + getImageFileFormat(0, parseInt(zeroPad($('[name="subbg"]').val(), 4)) )); });
+        $('#sub_pre').fadeOut(200, () => { $('#sub_pre').attr("src", isSubbgSlideshow ? "static/asset/submonitor_bg/subbg_" + zeroPad($('[name="subbg"]').val(), 4) + "_0" + (Math.floor(Math.random() * 3) + 1) + getImageFileFormat(0, parseInt(zeroPad($('[name="subbg"]').val(), 4))) : "static/asset/submonitor_bg/subbg_" + zeroPad($('[name="subbg"]').val(), 4) + getImageFileFormat(0, parseInt(zeroPad($('[name="subbg"]').val(), 4)))); });
         $('#sub_pre').fadeIn(200);
     }
 });
 
-$('[name="bgm"]').change(function() {
+$('[name="bgm"]').change(function () {
     $('#custom_0').attr("src", "static/asset/audio/custom_" + zeroPad($('[name="bgm"]').val(), 2) + "/0.mp3");
     $('#custom_1').attr("src", "static/asset/audio/custom_" + zeroPad($('[name="bgm"]').val(), 2) + "/1.mp3");
     if ($('[name="bgm"]').val() == 99) {
@@ -60,12 +62,12 @@ $('[name="bgm"]').change(function() {
     $('#custom_0').prop("volume", 0.5);
     $('#custom_1').prop("volume", 0.2);
 
-    $('#play_sel').animate({ 'opacity': 0 }, 200, function() {
+    $('#play_sel').animate({ 'opacity': 0 }, 200, function () {
         $(this).text('Play').animate({ 'opacity': 1 }, 200);
     });
     play_sel = false;
 
-    $('#play_bgm').animate({ 'opacity': 0 }, 200, function() {
+    $('#play_bgm').animate({ 'opacity': 0 }, 200, function () {
         $(this).text('Play').animate({ 'opacity': 1 }, 200);
     });
 
@@ -74,7 +76,7 @@ $('[name="bgm"]').change(function() {
 
 var testcurrent = 2.8;
 
-$('[name="stampA"]').change(function() {
+$('[name="stampA"]').change(function () {
     $('#a_pre').fadeOut(200, () => {
         var stamp = $('[name="stampA"]').val();
         if (stamp == 0) {
@@ -89,7 +91,7 @@ $('[name="stampA"]').change(function() {
     $('#a_pre').fadeIn(200);
 });
 
-$('[name="stampB"]').change(function() {
+$('[name="stampB"]').change(function () {
     $('#b_pre').fadeOut(200, () => {
         var stamp = $('[name="stampB"]').val();
         if (stamp == 0) {
@@ -104,7 +106,7 @@ $('[name="stampB"]').change(function() {
     $('#b_pre').fadeIn(200);
 });
 
-$('[name="stampC"]').change(function() {
+$('[name="stampC"]').change(function () {
     $('#c_pre').fadeOut(200, () => {
         var stamp = $('[name="stampC"]').val();
         if (stamp == 0) {
@@ -119,7 +121,7 @@ $('[name="stampC"]').change(function() {
     $('#c_pre').fadeIn(200);
 });
 
-$('[name="stampD"]').change(function() {
+$('[name="stampD"]').change(function () {
     $('#d_pre').fadeOut(200, () => {
         var stamp = $('[name="stampD"]').val();
         if (stamp == 0) {
@@ -134,7 +136,7 @@ $('[name="stampD"]').change(function() {
     $('#d_pre').fadeIn(200);
 });
 
-$('[name="stampRA"]').change(function() {
+$('[name="stampRA"]').change(function () {
     $('#ra_pre').fadeOut(200, () => {
         var stamp = $('[name="stampRA"]').val();
         if (stamp == 0) {
@@ -149,7 +151,7 @@ $('[name="stampRA"]').change(function() {
     $('#ra_pre').fadeIn(200);
 });
 
-$('[name="stampRB"]').change(function() {
+$('[name="stampRB"]').change(function () {
     $('#rb_pre').fadeOut(200, () => {
         var stamp = $('[name="stampRB"]').val();
         if (stamp == 0) {
@@ -164,7 +166,7 @@ $('[name="stampRB"]').change(function() {
     $('#rb_pre').fadeIn(200);
 });
 
-$('[name="stampRC"]').change(function() {
+$('[name="stampRC"]').change(function () {
     $('#rc_pre').fadeOut(200, () => {
         var stamp = $('[name="stampRC"]').val();
         if (stamp == 0) {
@@ -179,7 +181,7 @@ $('[name="stampRC"]').change(function() {
     $('#rc_pre').fadeIn(200);
 });
 
-$('[name="stampRD"]').change(function() {
+$('[name="stampRD"]').change(function () {
     $('#rd_pre').fadeOut(200, () => {
         var stamp = $('[name="stampRD"]').val();
         if (stamp == 0) {
@@ -196,7 +198,8 @@ $('[name="stampRD"]').change(function() {
 var profile_data, database;
 var play_bgm = false;
 var play_sel = false;
-$(document).ready(function() {
+$(document).ready(function () {
+    console.log("2");
     profile_data = JSON.parse(document.getElementById("data-pass").innerText);
     items_crew = JSON.parse(document.getElementById("data-pass-crew").innerText);
     items_stamp = JSON.parse(document.getElementById("data-pass-stamp").innerText);
@@ -208,8 +211,9 @@ $(document).ready(function() {
     courses = JSON.parse(document.getElementById("data-pass-courses").innerText);
     skill = JSON.parse(document.getElementById("data-pass-skill").innerText);
     unlock_all = (document.getElementById("data-pass-unlock-all").innerText === 'true');
+    console.log("3");
 
-    $.getJSON("static/asset/json/customize_data_ext.json", function(json) {
+    $.getJSON("static/asset/json/customize_data_ext.json", function (json) {
         database = json;
 
         for (var i in json["supportTeams"]) {
@@ -221,7 +225,7 @@ $(document).ready(function() {
         $('[name="bplSupport"]').val(profile_data["bplSupport"] ? profile_data["bplSupport"] : 0);
 
         for (var i in json["sysbg"]) {
-            if(unlock_all || (items_sysbg.find(x => x.id === json["sysbg"][i].id) || json["sysbg"][i].id === 0)) {
+            if (unlock_all || (items_sysbg.find(x => x.id === json["sysbg"][i].id) || json["sysbg"][i].id === 0)) {
                 $('[name="sysBG"]').append($('<option>', {
                     value: json["sysbg"][i].id,
                     text: json["sysbg"][i].name,
@@ -232,14 +236,14 @@ $(document).ready(function() {
 
         for (var i in json["skilltitle"]) {
             let foundCourses = courses.filter(c => c.cid === json["skilltitle"][i].id && c.clear >= 2)
-            if(foundCourses.length > 0) {   
+            if (foundCourses.length > 0) {
                 $('[name="skilltitle"]').append($('<option>', {
                     value: json["skilltitle"][i].id,
                     text: json["skilltitle"][i].name + ' (' + json["skilltitle"][i].info + ')',
                 }));
             }
         }
-        if(skill.length > 1) $('[name="skilltitle"]').val(skill[0]["name"]);
+        if (skill.length > 1) $('[name="skilltitle"]').val(skill[0]["name"]);
         else $('[name="skilltitle"]').attr('disabled', 'disabled')
 
         for (var i in json["appeal_frame"]) {
@@ -250,15 +254,16 @@ $(document).ready(function() {
         }
         $('[name="creatorItem"]').val(profile_data["creatorItem"] ? profile_data["creatorItem"] : 0);
     });
+    console.log("4");
 
-    $.getJSON("static/asset/json/data.json", function(json) {
+    $.getJSON("static/asset/json/data.json", function (json) {
         database = json;
 
         //console.log(json); // this will show the info it in firebug console
         //console.log(profile_data);
-
+        console.log("a");
         for (var i in json["nemsys"]) {
-            if(![8, 9, 10, 11].includes(json["nemsys"][i].value) && (unlock_all || (json["nemsys"][i].value === 0 || items_nemsys.find(x => x.id === json["nemsys"][i].value)))) {
+            if (![8, 9, 10, 11].includes(json["nemsys"][i].value) && (unlock_all || (json["nemsys"][i].value === 0 || items_nemsys.find(x => x.id === json["nemsys"][i].value)))) {
                 $('#nemsys_select').append($('<option>', {
                     value: json["nemsys"][i].value,
                     text: json["nemsys"][i].name,
@@ -271,13 +276,13 @@ $(document).ready(function() {
                 }*/
                 //console.log(profile_data["nemsys"])
             }
-                
+
         }
         $('#nemsys_select').val(profile_data["nemsys"]);
-
+        console.log("B");
         for (var i in json["subbg"]) {
-            
-            if(unlock_all || (json["subbg"][i].value === 0 || items_subbg.find(x => x.id === json["subbg"][i].value))) {
+
+            if (unlock_all || (json["subbg"][i].value === 0 || items_subbg.find(x => x.id === json["subbg"][i].value))) {
                 $('[name="subbg"]').append($('<option>', {
                     value: json["subbg"][i].value,
                     type: json["subbg"][i].type,
@@ -294,9 +299,9 @@ $(document).ready(function() {
             }
         }
         $('[name="subbg"]').val(profile_data["subbg"]);
-
+        console.log("C");
         for (var i in json["bgm"]) {
-            if(unlock_all || (json["bgm"][i].value === 0 || items_bgm.find(x => parseInt(x.id) === parseInt(json["bgm"][i].value)))) {
+            if (unlock_all || (json["bgm"][i].value === 0 || items_bgm.find(x => parseInt(x.id) === parseInt(json["bgm"][i].value)))) {
                 $('[name="bgm"]').append($('<option>', {
                     value: json["bgm"][i].value,
                     text: json["bgm"][i].name,
@@ -314,7 +319,7 @@ $(document).ready(function() {
             }
         }
         $('[name="bgm"]').val(profile_data["bgm"]);
-
+        console.log("D");
         for (var i in json["akaname"]) {
             $('[name="akaname"]').append($('<option>', {
                 value: json["akaname"][i].value,
@@ -323,11 +328,12 @@ $(document).ready(function() {
             //console.log(profile_data["akaname"])
         }
         $('[name="akaname"]').val(profile_data["akaname"]);
-
+        console.log("E");
         let ticketNum = (valgene_ticket !== null) ? valgene_ticket.ticketNum : 0
         $('[name="valgeneTicket"]').val(ticketNum)
-
-        for (var i in json["stamp"]) {
+        console.log("F");
+        //old Code
+        /*for (var i in json["stamp"]) {
             if(unlock_all || (json["stamp"][i].value === 0 || items_stamp.find(x => x.id === json["stamp"][i].value))) {
                 $('[name="stampA"]').append($('<option>', {
                     value: json["stamp"][i].value,
@@ -380,12 +386,63 @@ $(document).ready(function() {
                 var group = Math.trunc((json["stamp"][i].value - 1) / 4 + 1);
                 var item = json["stamp"][i].value % 4;
                 if (item == 0) item = 4;
-                /*var image = new Image();
+                //var image = new Image();
 
-                image.src = "static/asset/chat_stamp/stamp_" + zeroPad(group, 4) + "/stamp_" + zeroPad(group, 4) + "_" + zeroPad(item, 2) + ".png";*/
+                //image.src = "static/asset/chat_stamp/stamp_" + zeroPad(group, 4) + "/stamp_" + zeroPad(group, 4) + "_" + zeroPad(item, 2) + ".png";
+            }
+        }*/
+        var $stampA = $('[name="stampA"]');
+        var $stampB = $('[name="stampB"]');
+        var $stampC = $('[name="stampC"]');
+        var $stampD = $('[name="stampD"]');
+        var $stampRA = $('[name="stampRA"]');
+        var $stampRB = $('[name="stampRB"]');
+        var $stampRC = $('[name="stampRC"]');
+        var $stampRD = $('[name="stampRD"]');
+
+        var optionsA = [];
+        var optionsB = [];
+        var optionsC = [];
+        var optionsD = [];
+        var optionsRA = [];
+        var optionsRB = [];
+        var optionsRC = [];
+        var optionsRD = [];
+
+        for (var i in json["stamp"]) {
+            var stamp = json["stamp"][i];
+            if (unlock_all || (stamp.value === 0 || items_stamp.find(x => x.id === stamp.value))) {
+                var option = $('<option>', { value: stamp.value, text: stamp.name });
+
+                optionsA.push(option.clone());
+                optionsB.push(option.clone());
+                optionsC.push(option.clone());
+                optionsD.push(option.clone());
+                optionsRA.push(option.clone());
+                optionsRB.push(option.clone());
+                optionsRC.push(option.clone());
+                optionsRD.push(option.clone());
+
+                var group = Math.trunc((stamp.value - 1) / 4 + 1);
+                var item = stamp.value % 4;
+                if (item == 0) item = 4;
+
+                // var image = new Image();
+                // image.src = "static/asset/chat_stamp/stamp_" + zeroPad(group, 4) + "/stamp_" + zeroPad(group, 4) + "_" + zeroPad(item, 2) + ".png";
             }
         }
+        $stampA.append(optionsA).val(profile_data["stampA"]);
+        $stampB.append(optionsB).val(profile_data["stampB"]);
+        $stampC.append(optionsC).val(profile_data["stampC"]);
+        $stampD.append(optionsD).val(profile_data["stampD"]);
+        $stampRA.append(optionsRA).val(profile_data["stampRA"]);
+        $stampRB.append(optionsRB).val(profile_data["stampRB"]);
+        $stampRC.append(optionsRC).val(profile_data["stampRC"]);
+        $stampRD.append(optionsRD).val(profile_data["stampRD"]);
+
+        console.log("G");
     });
+    console.log("5");
 
 
     if (profile_data["nemsys"] != 30) {
@@ -397,12 +454,12 @@ $(document).ready(function() {
     $('#sub_pre').fadeOut(200)
     $('#sub_pre_vid').fadeOut(200)
 
-    $.getJSON("static/asset/json/data.json", function(json) {
+    $.getJSON("static/asset/json/data.json", function (json) {
         database = json
         let subbgType = database['subbg'].filter((e => e.value === parseInt(profile_data["subbg"])))[0]['type']
         let isSubbgSlideshow = (subbgType === 'slideshow')
 
-        if(subbgType === 'video') {
+        if (subbgType === 'video') {
             $('#sub_pre_vid').empty().append(
                 $("<source id='sub_pre_vid_src' src='static/asset/submonitor_bg/subbg_" + zeroPad(profile_data["subbg"], 4) + ".mp4'>")
             )
@@ -412,6 +469,7 @@ $(document).ready(function() {
             $('#sub_pre').fadeIn(200)
         }
     })
+    console.log("6");
     // console.log(database)
     $('#custom_0').attr("src", "static/asset/audio/custom_" + zeroPad(profile_data["bgm"], 2) + "/0.mp3");
     $('#custom_1').attr("src", "static/asset/audio/custom_" + zeroPad(profile_data["bgm"], 2) + "/1.mp3");
@@ -491,82 +549,84 @@ $(document).ready(function() {
         if (item == 0) item = 4;
         $('#rd_pre').attr("src", "static/asset/chat_stamp/stamp_" + zeroPad(group, 4) + "/stamp_" + zeroPad(group, 4) + "_" + zeroPad(item, 2) + ".png");
     }
+    console.log("7");
 
     $('#bgm_pre').append(
         $('<div class="buttons">').append(
             $('<button class="button is-primary" type="button" id="play_bgm">')
-            .append("Play")
-            .click(function() {
-                if (play_bgm) {
-                    $('#custom_0').trigger('pause');
-                    $('#play_bgm').animate({ 'opacity': 0 }, 200, function() {
-                        $(this).text('Play').animate({ 'opacity': 1 }, 200);
-                    });
-                    play_bgm = false;
-                } else {
-                    $('#custom_0').trigger('play');
+                .append("Play")
+                .click(function () {
+                    if (play_bgm) {
+                        $('#custom_0').trigger('pause');
+                        $('#play_bgm').animate({ 'opacity': 0 }, 200, function () {
+                            $(this).text('Play').animate({ 'opacity': 1 }, 200);
+                        });
+                        play_bgm = false;
+                    } else {
+                        $('#custom_0').trigger('play');
 
-                    $('#play_bgm').animate({ 'opacity': 0 }, 200, function() {
-                        $(this).text('Pause').animate({ 'opacity': 1 }, 200);
-                    });
-                    play_bgm = true;
-                }
-            })
+                        $('#play_bgm').animate({ 'opacity': 0 }, 200, function () {
+                            $(this).text('Pause').animate({ 'opacity': 1 }, 200);
+                        });
+                        play_bgm = true;
+                    }
+                })
         )
     )
 
     $('#sel_pre').append(
         $('<div class="buttons">').append(
             $('<button class="button is-primary" type="button" id="play_sel">')
-            .append("Play")
-            .click(function() {
-                if (play_sel) {
-                    $('#custom_1').trigger('pause');
-                    $('#play_sel').animate({ 'opacity': 0 }, 200, function() {
-                        $(this).text('Play').animate({ 'opacity': 1 }, 200);
-                    });
-                    play_sel = false;
-                } else {
-                    $('#custom_1').trigger('play');
+                .append("Play")
+                .click(function () {
+                    if (play_sel) {
+                        $('#custom_1').trigger('pause');
+                        $('#play_sel').animate({ 'opacity': 0 }, 200, function () {
+                            $(this).text('Play').animate({ 'opacity': 1 }, 200);
+                        });
+                        play_sel = false;
+                    } else {
+                        $('#custom_1').trigger('play');
 
-                    $('#play_sel').animate({ 'opacity': 0 }, 200, function() {
-                        $(this).text('Pause').animate({ 'opacity': 1 }, 200);
-                    });
-                    play_sel = true;
-                }
-            })
+                        $('#play_sel').animate({ 'opacity': 0 }, 200, function () {
+                            $(this).text('Pause').animate({ 'opacity': 1 }, 200);
+                        });
+                        play_sel = true;
+                    }
+                })
         )
     )
 
-    $('#custom_0').on('ended', function() {
+    $('#custom_0').on('ended', function () {
         $('#custom_0').currentTime = 0;
-        $('#play_bgm').animate({ 'opacity': 0 }, 200, function() {
+        $('#play_bgm').animate({ 'opacity': 0 }, 200, function () {
             $(this).text('Play').animate({ 'opacity': 1 }, 200);
         });
 
         play_bgm = false;
     });
 
-    $('#custom_1').on('ended', function() {
+    $('#custom_1').on('ended', function () {
         $('#custom_1').currentTime = 0;
-        $('#play_sel').animate({ 'opacity': 0 }, 200, function() {
+        $('#play_sel').animate({ 'opacity': 0 }, 200, function () {
             $(this).text('Play').animate({ 'opacity': 1 }, 200);
         });
         play_sel = false;
     });
 
-    $('#custom_0').on('timeupdate', function() {
+    $('#custom_0').on('timeupdate', function () {
         var currentTime = parseInt($('#custom_0').prop('currentTime'));
         var duration = parseInt($('#custom_0').prop('duration'));
         var percent = currentTime / duration * 100;
 
     });
 
-    $('#custom_1').on('timeupdate', function() {
+    $('#custom_1').on('timeupdate', function () {
         var currentTime = parseInt($('#custom_1').prop('currentTime'));
         var duration = parseInt($('#custom_1').prop('duration'));
         var percent = currentTime / duration * 100;
 
 
     });
+    console.log("8");
 })
