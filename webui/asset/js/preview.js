@@ -5,8 +5,8 @@ function zeroPad(num, places) {
 
 function getImageFileFormat(assetType, id) {
     if(assetType == 0) {
-        if (id >= 103) return '.png' 
-        return '.jpg'
+        //if (id >= 103) return '.png' 
+        return '.png'
     }
 }
 
@@ -263,12 +263,12 @@ $(document).ready(function() {
                     value: json["nemsys"][i].value,
                     text: json["nemsys"][i].name,
                 }));
-                var image = new Image();
+                /*var image = new Image();
                 if (json["nemsys"][i].value != 30) {
                     image.src = "static/asset/nemsys/nemsys_" + zeroPad(json["nemsys"][i].value, 4) + ".png";
                 } else {
                     image.src = "static/asset/nemsys/nemsys_aprilfool.png";
-                }
+                }*/
                 //console.log(profile_data["nemsys"])
             }
                 
@@ -283,12 +283,12 @@ $(document).ready(function() {
                     type: json["subbg"][i].type,
                     text: json["subbg"][i].name,
                 }));
-                var image = new Image();
+                /*var image = new Image();
                 if (json["subbg"][i].type === 'slideshow') {
                     image.src = "static/asset/submonitor_bg/subbg_" + zeroPad(json["subbg"][i].value, 4) + "_0" + (Math.floor(Math.random() * 3) + 1) + getImageFileFormat(0, parseInt(zeroPad(json["subbg"][i].value, 4)));
                 } else if (json["subbg"][i].type === 'normal') {
                     image.src = "static/asset/submonitor_bg/subbg_" + zeroPad(json["subbg"][i].value, 4) + getImageFileFormat(0, parseInt(zeroPad(json["subbg"][i].value, 4)));
-                }
+                }*/
                 // console.log(image);
                 //console.log(profile_data["subbg"])
             }
@@ -301,14 +301,14 @@ $(document).ready(function() {
                     value: json["bgm"][i].value,
                     text: json["bgm"][i].name,
                 }));
-                var audio = new Audio();
+                /*var audio = new Audio();
                 var audio1 = new Audio();
                 if (json["bgm"][i].value == 99) {
                     audio.src = "static/asset/audio/special_00/0.mp3"
                 } else {
                     audio.src = "static/asset/audio/custom_" + zeroPad(json["bgm"][i].value, 2) + "/0.mp3"
                     audio1.src = "static/asset/audio/custom_" + zeroPad(json["bgm"][i].value, 2) + "/1.mp3"
-                }
+                }*/
 
                 //console.log(profile_data["bgm"])
             }
@@ -380,9 +380,9 @@ $(document).ready(function() {
                 var group = Math.trunc((json["stamp"][i].value - 1) / 4 + 1);
                 var item = json["stamp"][i].value % 4;
                 if (item == 0) item = 4;
-                var image = new Image();
+                /*var image = new Image();
 
-                image.src = "static/asset/chat_stamp/stamp_" + zeroPad(group, 4) + "/stamp_" + zeroPad(group, 4) + "_" + zeroPad(item, 2) + ".png";
+                image.src = "static/asset/chat_stamp/stamp_" + zeroPad(group, 4) + "/stamp_" + zeroPad(group, 4) + "_" + zeroPad(item, 2) + ".png";*/
             }
         }
     });
