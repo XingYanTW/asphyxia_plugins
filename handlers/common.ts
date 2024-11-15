@@ -103,12 +103,11 @@ export const common: EPR = async (info, data, send) => {
               // if song is released during exceed gear
               if(songData.info.version['#text'] === '6') { 
                 // Licensed songs released in Exceed Gear needs limited=3 to appear
-                if(LICENSED_SONGS6.includes(i.toString())) {
-                  limitedNo += 1;
-                }
-                else if(VALKYRIE_SONGS.includes(i.toString()) && info.model.split(":")[2].match(/^(G|H)$/g) == null){
-                  limitedNo -= 1;
-                }
+                if(LICENSED_SONGS6.includes(i.toString())) limitedNo += 1;
+                else if(VALKYRIE_SONGS.includes(i.toString()) && info.model.split(":")[2].match(/^(G|H)$/g) == null) limitedNo -= 1;
+                
+                if(i === 2034) limitedNo = 2;
+
                 for(let j = 0; j < 5; j++) {
                   songs.push({
                     music_id: K.ITEM('s32', i),
@@ -231,7 +230,7 @@ export const common: EPR = async (info, data, send) => {
               'id': stmpEvntInfo['info']['id'],
               'params': [
                 9,
-                (stmpEvntInfo['info']['textstampval'] !== undefined) ? stmpEvntInfo['info']['textstampval'] : 0,
+                ((stmpEvntInfo['info']['textstampval'] !== undefined) ? stmpEvntInfo['info']['textstampval'] : 0),
                 0,
                 0,
                 0,
@@ -383,10 +382,7 @@ export const common: EPR = async (info, data, send) => {
         ],
       });
       }
-      
     }
-
-    console.log("Sending common objects");
 
     let arena_szn = U.GetConfig('arena_szn')  
     let arena_catalog_items = []
@@ -424,7 +420,10 @@ export const common: EPR = async (info, data, send) => {
       })
     })
 
-    if(currentDate.substring(0,4) === '4/1/' || U.GetConfig('april_fools')) {
+    if(currentDate.substring(0,4) === '2/5/') events.push("EVENTDATE_ONIGO")
+    if(currentDate.substring(0,5) === '2/14/') events.push('VALENTINES_DAY_2024')
+    if(currentDate.substring(0,5) === '2/15/') events.push('WHITE_DAY_2024')
+    if(currentDate.substring(0,4) === '4/1/') {
       console.log('Using April Fools Event')
       events.push('APRIL_GRACE');
       events.push('EVENTDATE_APRILFOOL');
@@ -438,7 +437,11 @@ export const common: EPR = async (info, data, send) => {
         }
       }
     }
-
+    if(currentDate.substring(0,5) === '5/10/') events.push("EVENTDATE_GOTT")
+    if(['10/24/', '10/25/', '10/26/', '10/27/', '10/28/', '10/29/', '10/30/', '10/31/'].includes(currentDate.substring(0,6))) events.push('HALLOWEEN_EVENT')
+    if(['12/24/', '12/25/', '12/26/'].includes(currentDate.substring(0,6))) events.push('MERRY_CHRISTMAS_2023')
+    
+    console.log("Sending common objects");
     send.object(
       {
         valgene: {
